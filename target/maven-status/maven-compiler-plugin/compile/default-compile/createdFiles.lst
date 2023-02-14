@@ -1,0 +1,4 @@
+data\Data.class
+basePage\BaseSeleniumPage.class
+pages\FormPage.class
+pages\StartPage.class
