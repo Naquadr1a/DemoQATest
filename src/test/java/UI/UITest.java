@@ -2,6 +2,7 @@ package UI;
 
 import baseTest.BaseSeleniumTest;
 import data.Data;
+import data.PersonData;
 import org.testng.annotations.Test;
 import pages.StartPage;
 
@@ -10,13 +11,10 @@ public class UITest extends BaseSeleniumTest
     @Test
     public void studentRegister()
     {
-
-        Data data = new Data();
-        StartPage startPage = new StartPage(data.getURL());
+        StartPage startPage = new StartPage(new Data().getURL());
         startPage.selectType()
                 .selectform()
-                .fillingForm(data.getFirstName(), data.getSecondName(),
-                        data.getEmail(), data.getAddress(), data.getMobile(), data.getSubject(), data.getState(), data.getCity())
+                .fillingForm(new PersonData())
                 .submitForm()
                 .closeForm();
     }

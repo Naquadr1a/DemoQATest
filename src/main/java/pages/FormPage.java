@@ -1,13 +1,12 @@
 package pages;
 
 import basePage.BaseSeleniumPage;
+import data.PersonData;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.Date;
 
 public class FormPage extends BaseSeleniumPage
 {
@@ -61,7 +60,7 @@ public class FormPage extends BaseSeleniumPage
     @FindBy(xpath = "//*[text()='29']")
     private WebElement dateOfBirthday;
 
-    @FindBy(css = "button#submit")
+    @FindBy(xpath = "//button[@id='submit']")
     private WebElement submitButton;
 
     @FindBy(css = "input#react-select-3-input")
@@ -80,19 +79,18 @@ public class FormPage extends BaseSeleniumPage
         return this;
     }
 
-    public FormPage fillingForm(String firstname,
-                            String lastName, String email, String address, String mobile, String subject, String state, String city)
+    public FormPage fillingForm(PersonData personData)
     {
-        lastNameInput.sendKeys(lastName);
-        firstNameInput.sendKeys(firstname);
-        inputEmail.sendKeys(email);
+        lastNameInput.sendKeys(personData.getSecondName());
+        firstNameInput.sendKeys(personData.getFirstName());
+        inputEmail.sendKeys(personData.getEmail());
         chooseGender.click();
-        inputMobile.sendKeys(mobile);
-        inputSubject.sendKeys(subject);
+        inputMobile.sendKeys(personData.getMobile());
+        inputSubject.sendKeys(personData.getSubject());
         inputSubject.sendKeys(Keys.ENTER);
         driverWait.until(ExpectedConditions.elementToBeClickable(chooseHobbies))
                 .click();
-        currentAdsress.sendKeys(address);
+        currentAdsress.sendKeys(personData.getAddress());
         driverWait.until(ExpectedConditions.visibilityOf(calendar))
                 .click();
         monthPicker.click();
@@ -100,8 +98,8 @@ public class FormPage extends BaseSeleniumPage
         yearPicker.click();
         yearOfBirthday.click();
         dateOfBirthday.click();
-        selectState.sendKeys(state, Keys.ENTER);
-        selectCity.sendKeys(city, Keys.ENTER);
+        selectState.sendKeys(personData.getState(), Keys.ENTER);
+        selectCity.sendKeys(personData.getCity(), Keys.ENTER);
         return this;
     }
 
